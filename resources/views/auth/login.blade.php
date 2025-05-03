@@ -12,23 +12,20 @@
                         @csrf
                         <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
-                            <input type="email" name="email" id="email" class="form-control form-control-lg" value="{{ old('email') }}" placeholder="you@example.com">
+                            <input type="email" name="email" id="email" class="form-control form-control-lg"
+                                value="{{ old('email') }}" placeholder="you@example.com">
                             @error('email')
                                 <div class="text-danger mt-1">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" name="password" id="password" class="form-control form-control-lg" placeholder="Enter your password">
+                            <input type="password" name="password" id="password" class="form-control form-control-lg"
+                                placeholder="Enter your password">
                             @error('password')
                                 <div class="text-danger mt-1">{{ $message }}</div>
                             @enderror
                         </div>
-                        {{-- Optional: Add Remember Me checkbox if needed --}}
-                        {{-- <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="remember" name="remember">
-                            <label class="form-check-label" for="remember">Remember me</label>
-                        </div> --}}
                         <div class="d-grid gap-2 my-4">
                             <button type="submit" class="btn btn-primary btn-lg">Login</button>
                         </div>
