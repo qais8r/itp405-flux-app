@@ -24,14 +24,14 @@
                                 <form action="{{ route('likes.destroy', $post) }}" method="POST" class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger border-0 p-0 ms-1">
+                                    <button type="submit" class="btn btn-sm border-0 p-0 ms-1">
                                         <i class="bi bi-heart-fill"></i>
                                     </button>
                                 </form>
                             @else
                                 <form action="{{ route('likes.store', $post) }}" method="POST" class="d-inline">
                                     @csrf
-                                    <button type="submit" class="btn btn-sm btn-outline-danger border-0 p-0 ms-1">
+                                    <button type="submit" class="btn btn-sm border-0 p-0 ms-1">
                                         <i class="bi bi-heart"></i>
                                     </button>
                                 </form>
