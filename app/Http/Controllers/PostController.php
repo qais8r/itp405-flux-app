@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -31,7 +32,7 @@ class PostController extends Controller
         $path = $request->file('image')->store('posts', 'public');
 
         $post = Post::create([
-            'user_id'    => auth()->id(), // TODO: ensure auth middleware
+            'user_id'    => auth()->id(),
             'image_path' => $path,
             'caption'    => $data['caption'] ?? null,
         ]);
@@ -61,8 +62,7 @@ class PostController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            // Optional: delete old image
-            // Storage::disk('public')->delete($post->image_path);
+            Storage::disk('public')->delete($post->image_path);
 
             $post->image_path = $request->file('image')->store('posts', 'public');
         }
@@ -77,6 +77,10 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
+        // Delete the image file from storage first
+        Storage::disk('public')->delete($post->image_path);
+        
+        // Then delete the post record
         $post->delete();
 
         session()->flash('success', 'Post deleted successfully.');
