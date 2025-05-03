@@ -2,9 +2,10 @@
 @section('title', 'View Post by @' . $post->user->username)
 
 @section('content')
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="card shadow-sm mb-4">
+    <div class="row">
+        {{-- Post Column --}}
+        <div class="col-lg-7 mb-4 mb-lg-0">
+            <div class="card shadow-sm h-100">
                 <div class="card-header bg-white d-flex justify-content-between align-items-center p-3">
                     <h1 class="h5 mb-0">
                         <a href="#" class="text-decoration-none text-dark fw-bold">&#64;{{ $post->user->username }}</a>
@@ -12,11 +13,12 @@
                     <small class="text-muted">{{ $post->created_at->diffForHumans() }}</small>
                 </div>
                 <img src="{{ asset('storage/' . $post->image_path) }}" class="card-img-top"
-                    alt="Post image by {{ $post->user->username }}">
-                <div class="card-body">
+                    alt="Post image by {{ $post->user->username }}"
+                    style="max-height: 600px; width: 100%; object-fit: cover;">
+                <div class="card-body d-flex flex-column">
                     <p class="card-text">{{ $post->caption }}</p>
                     @auth {{-- Action Buttons --}}
-                        <div class="d-flex gap-2 border-top pt-3 mt-3">
+                        <div class="d-flex gap-2 border-top pt-3 mt-auto">
                             @if ($post->isFavoritedBy(auth()->user()))
                                 {{-- Unfavorite Button --}}
                                 <form action="{{ route('favorites.destroy', $post) }}" method="POST">
@@ -55,13 +57,15 @@
                     @endauth
                 </div>
             </div>
+        </div>
 
-            <!-- Comments Section -->
-            <div class="card shadow-sm">
+        {{-- Comments Column --}}
+        <div class="col-lg-5">
+            <div class="card shadow-sm h-100">
                 <div class="card-header bg-light p-3">
                     <h3 class="h5 mb-0">Comments ({{ $post->comments->count() }})</h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body d-flex flex-column">
                     @auth
                         <!-- Add Comment Form -->
                         <form action="{{ route('comments.store', $post) }}" method="POST" class="mb-4">
@@ -83,46 +87,52 @@
                     @endauth
 
                     <!-- Display Comments -->
-                    @if ($post->comments->isEmpty())
-                        <p class="text-muted text-center mt-3">No comments yet. Be the first!</p>
-                    @else
-                        <ul class="list-unstyled">
-                            @foreach ($post->comments->sortByDesc('created_at') as $comment)
-                                <li class="mt-3 pt-3 border-top">
-                                    <div class="d-flex justify-content-between align-items-start">
-                                        <div>
-                                            <strong>
-                                                <a href="#"
-                                                    class="text-decoration-none text-dark">&#64;{{ $comment->user->username }}</a>
-                                            </strong>
-                                            <p class="mb-1">{{ $comment->body }}</p>
-                                            <small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small>
+                    <div class="flex-grow-1" style="overflow-y: auto; max-height: 450px;"> {{-- Added wrapper for scrollable comments --}}
+                        @if ($post->comments->isEmpty())
+                            <p class="text-muted text-center mt-3">No comments yet. Be the first!</p>
+                        @else
+                            <ul class="list-unstyled mb-0">
+                                @foreach ($post->comments->sortByDesc('created_at') as $index => $comment)
+                                    <li class="{{ $index > 0 ? 'mt-3 pt-3 border-top' : '' }}">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <div>
+                                                <strong>
+                                                    <a href="#"
+                                                        class="text-decoration-none text-dark">&#64;{{ $comment->user->username }}</a>
+                                                </strong>
+                                                <p class="mb-1">{{ $comment->body }}</p>
+                                                <small
+                                                    class="text-muted">{{ $comment->created_at->diffForHumans() }}</small>
+                                            </div>
+                                            @auth
+                                                @if (auth()->id() === $comment->user_id)
+                                                    <div class="d-flex gap-1 flex-shrink-0 ms-2">
+                                                        <a href="{{ route('comments.edit', $comment) }}"
+                                                            class="btn btn-sm btn-outline-secondary py-0 px-1"
+                                                            title="Edit Comment"> {{-- Made buttons smaller --}}
+                                                            <i class="bi bi-pencil"></i>
+                                                        </a>
+                                                        <form action="{{ route('comments.destroy', $comment) }}" method="POST"
+                                                            class="d-inline"
+                                                            onsubmit="return confirm('Are you sure you want to delete this comment?');">
+                                                            {{-- Updated confirm message --}}
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit"
+                                                                class="btn btn-sm btn-outline-danger py-0 px-1"
+                                                                title="Delete Comment"> {{-- Made buttons smaller --}}
+                                                                <i class="bi bi-trash"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                @endif
+                                            @endauth
                                         </div>
-                                        @auth
-                                            @if (auth()->id() === $comment->user_id)
-                                                <div class="d-flex gap-1 flex-shrink-0 ms-2">
-                                                    <a href="{{ route('comments.edit', $comment) }}"
-                                                        class="btn btn-sm btn-outline-secondary" title="Edit">
-                                                        <i class="bi bi-pencil-fill"></i>
-                                                    </a>
-                                                    <form action="{{ route('comments.destroy', $comment) }}" method="POST"
-                                                        class="d-inline"
-                                                        onsubmit="return confirm('Are you sure you want to delete this post?');">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-outline-danger"
-                                                            title="Delete">
-                                                            <i class="bi bi-trash-fill"></i>
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            @endif
-                                        @endauth
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
-                    @endif
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
