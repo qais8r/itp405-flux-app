@@ -27,7 +27,7 @@
                         </a>
                         <div class="card-body d-flex flex-column">
                             <p class="card-text mb-2">{{ Str::limit($post->caption, 80) }}</p>
-                            <small class="text-muted mb-3">Posted by {{ $post->user->username }}
+                            <small class="text-muted mb-3">Posted by &#64;{{ $post->user->username }} •
                                 {{ $post->created_at->diffForHumans() }}</small>
                             <div class="mt-auto d-flex justify-content-between align-items-center">
                                 <a href="{{ route('posts.show', $post) }}" class="btn btn-sm btn-outline-primary">
