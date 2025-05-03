@@ -5,12 +5,6 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavoriteController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
-
 // Home → list of posts
 Route::get('/', [PostController::class, 'index'])->name('posts.index');
 
