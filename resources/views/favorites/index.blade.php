@@ -2,30 +2,49 @@
 @section('title', 'Your Favorites')
 
 @section('content')
-    <h1 class="mb-4">Your Favorite Posts</h1>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-0">Your Favorite Posts</h1>
+        {{-- Optional: Add a button or link back if needed --}}
+    </div>
+
     @if ($favorites->isEmpty())
-        <p>You haven't favorited any posts yet. <a href="{{ route('posts.index') }}">Browse posts</a>.</p>
+        <div class="alert alert-info text-center shadow-sm" role="alert">
+            <h4 class="alert-heading"><i class="bi bi-emoji-frown me-2"></i> Nothing here yet!</h4>
+            <p>You haven't favorited any posts. Why not <a href="{{ route('posts.index') }}" class="alert-link">browse the feed</a> and find some you like?</p>
+        </div>
     @else
-        <div class="row">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             @foreach ($favorites as $post)
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <img src="{{ asset('storage/' . $post->image_path) }}" class="card-img-top" alt="Post image"
-                            style="aspect-ratio: 1 / 1; object-fit: cover;">
-                        <div class="card-body">
-                            <p class="card-text">{{ Str::limit($post->caption, 100) }}</p>
-                            <a href="{{ route('posts.show', $post) }}" class="btn btn-primary">View</a>
-                            <form action="{{ route('favorites.destroy', $post) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-warning" title="Unfavorite">
-                                    <i class="bi bi-bookmark-fill"></i> Favorited
-                                </button>
-                            </form>
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-light">
+                         <a href="{{ route('posts.show', $post) }}">
+                            <img src="{{ asset('storage/' . $post->image_path) }}" class="card-img-top" alt="Post image by {{ $post->user->username }}"
+                                style="aspect-ratio: 1 / 1; object-fit: cover;">
+                        </a>
+                        <div class="card-body d-flex flex-column">
+                            <p class="card-text mb-2">{{ Str::limit($post->caption, 80) }}</p>
+                            <small class="text-muted mb-3">Posted by {{ $post->user->username }} {{ $post->created_at->diffForHumans() }}</small>
+                            <div class="mt-auto d-flex justify-content-between align-items-center">
+                                <a href="{{ route('posts.show', $post) }}" class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-eye-fill me-1"></i> View
+                                </a>
+                                {{-- Unfavorite Button --}}
+                                <form action="{{ route('favorites.destroy', $post) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-warning" title="Unfavorite">
+                                        <i class="bi bi-bookmark-x-fill"></i> Unfavorite
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
+        {{-- Optional: Add pagination links if you implement pagination for favorites --}}
+        {{-- <div class="mt-4">
+            {{ $favorites->links() }}
+        </div> --}}
     @endif
 @endsection
