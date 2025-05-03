@@ -19,7 +19,8 @@
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
             @foreach ($posts as $post)
                 <div class="col">
-                    <div class="card h-100 shadow-sm border-light">
+                    {{-- If user owns post, add border-primary. Otherwise, use regular border --}}
+                    <div class="card h-100 shadow-sm {{ auth()->id() === $post->user_id ? 'border-primary' : 'border' }}">
                         <a href="{{ route('posts.show', $post) }}">
                             <img src="{{ asset('storage/' . $post->image_path) }}" class="card-img-top"
                                 alt="Post image by {{ $post->user->username }}"
