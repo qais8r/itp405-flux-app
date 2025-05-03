@@ -6,6 +6,7 @@
         <h1 class="mb-4">&#64;{{ $post->user->username }} • Post</h1>
         @if (auth()->id() === $post->user_id)
             <div class="mb-3">
+                <a href="{{ route('posts.edit', $post) }}" class="btn btn-outline-secondary ms-1">Edit</a>
                 <form action="{{ route('posts.destroy', $post) }}" method="POST" class="d-inline"
                     onsubmit="return confirm('Are you sure you want to delete this post?');">
                     @csrf

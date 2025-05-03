@@ -12,12 +12,15 @@
                 @foreach ($posts as $post)
                     <div class="col-md-4 mb-4">
                         <div class="card h-100">
-                            <img src="{{ asset('storage/' . $post->image_path) }}" class="card-img-top" alt="Post image" style="aspect-ratio: 1 / 1; object-fit: cover;">
+                            <img src="{{ asset('storage/' . $post->image_path) }}" class="card-img-top" alt="Post image"
+                                style="aspect-ratio: 1 / 1; object-fit: cover;">
                             <div class="card-body">
                                 <p class="card-text">{{ Str::limit($post->caption, 100) }}</p>
                                 <a href="{{ route('posts.show', $post) }}" class="btn btn-primary">View</a>
                                 @if (auth()->id() === $post->user_id)
-                                    <form action="{{ route('posts.destroy', $post) }}" method="POST" class="d-inline"
+                                    <a href="{{ route('posts.edit', $post) }}"
+                                        class="btn btn-outline-secondary ms-1">Edit</a>
+                                    <form action="{{ route('posts.destroy', $post) }}" method="POST" class="d-inline ms-1"
                                         onsubmit="return confirm('Are you sure you want to delete this post?');">
                                         @csrf
                                         @method('DELETE')
