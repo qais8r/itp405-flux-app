@@ -5,6 +5,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LikeController;
 
 // Authentication
 Route::get('register',      [AuthController::class, 'showRegister'])->name('register');
