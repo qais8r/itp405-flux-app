@@ -4,8 +4,21 @@
 @section('content')
     <div class="bg-white text-dark p-4 rounded">
         <h1 class="mb-4">&#64;{{ $post->user->username }} • Post</h1>
+        @if (auth()->id() === $post->user_id)
+            <div class="mb-3">
+                <form action="{{ route('posts.destroy', $post) }}" method="POST" class="d-inline"
+                    onsubmit="return confirm('Are you sure you want to delete this post?');">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger">
+                        <i class="bi bi-trash"></i> Delete Post
+                    </button>
+                </form>
+            </div>
+        @endif
         <div class="mb-4">
-            <img src="{{ asset('storage/' . $post->image_path) }}" class="img-fluid rounded" alt="Post image">
+            <img src="{{ asset('storage/' . $post->image_path) }}" class="img-fluid rounded"
+                alt="&#64;{{ $post->user->username }} image">
         </div>
         <p>{{ $post->caption }}</p>
         <p class="text-muted">Posted {{ $post->created_at->diffForHumans() }}</p>
