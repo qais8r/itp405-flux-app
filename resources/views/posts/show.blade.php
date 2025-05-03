@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="bg-white text-dark p-4 rounded">
-        <h1 class="mb-4">{{ $post->user->username }}'s Post</h1>
+        <h1 class="mb-4">&#64;{{ $post->user->username }} • Post</h1>
         <div class="mb-4">
             <img src="{{ asset('storage/' . $post->image_path) }}" class="img-fluid rounded" alt="Post image">
         </div>
