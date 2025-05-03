@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="mb-0">Flux Feed</h1>
+        <h1 class="mb-0">Welcome back, {{ Str::words($user->name, 1, '') }}.</h1>
         <a href="{{ route('posts.create') }}" class="btn btn-primary">
             <i class="bi bi-plus-circle-fill me-1"></i> Create Post
         </a>

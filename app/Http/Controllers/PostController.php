@@ -10,11 +10,13 @@ class PostController extends Controller
 {
     public function index()
     {
+        $user = auth()->user();
+
         $posts = Post::latest()
             ->with(['user', 'comments'])
             ->get();
 
-        return view('posts.index', compact('posts'));
+        return view('posts.index', compact('user', 'posts'));
     }
 
     public function create()
