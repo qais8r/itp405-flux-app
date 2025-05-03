@@ -25,7 +25,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm border-0 p-0 ms-1">
-                                        <i class="bi bi-heart-fill"></i>
+                                        <i class="bi bi-heart-fill text-danger"></i>
                                     </button>
                                 </form>
                             @else
