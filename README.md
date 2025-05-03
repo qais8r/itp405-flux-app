@@ -1,4 +1,4 @@
-# Flux App - ITP-405 Final Project
+# Flux App • ITP-405 Final Project
 
 Flux is a web application developed as my final project for ITP-405. It mimics a simple social media feed where users can register, log in, create posts with images and captions, comment on posts, and favorite posts they like.
 
@@ -33,7 +33,7 @@ Flux is a web application developed as my final project for ITP-405. It mimics a
 
 ## 🧑‍💻 Author
 
-*   **Qaisar** - *ITP-405 Student*
+**Qaisar** - *ITP-405 Student*
 
 ---
 
