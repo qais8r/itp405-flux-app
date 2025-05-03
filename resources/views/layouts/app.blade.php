@@ -19,13 +19,6 @@
                 <ul class="navbar-nav ms-auto">
                     @auth
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('register') }}">Register</a>
-                        </li>
-                    @else
-                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('posts.index') }}">Posts</a>
                         </li>
                         <li class="nav-item">
@@ -36,6 +29,13 @@
                                 @csrf
                                 <button type="submit" class="btn btn-link nav-link">Logout</button>
                             </form>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">Register</a>
                         </li>
                     @endauth
                 </ul>
