@@ -29,18 +29,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/posts/{post}',       [PostController::class, 'destroy'])->name('posts.destroy')->middleware('owns.post'); 
 
     // Comments (nested under posts for creation)
-    Route::post('/posts/{post}/comments',          [CommentController::class, 'store'])->name('comments.store');
-    Route::get('/comments/{comment}/edit',         [CommentController::class, 'edit'])->name('comments.edit')->middleware('owns.comment'); 
-    Route::put('/comments/{comment}',              [CommentController::class, 'update'])->name('comments.update')->middleware('owns.comment'); 
-    Route::delete('/comments/{comment}',           [CommentController::class, 'destroy'])->name('comments.destroy')->middleware('owns.comment'); 
+    Route::post('/posts/{post}/comments',      [CommentController::class, 'store'])->name('comments.store');
+    Route::get('/comments/{comment}/edit',     [CommentController::class, 'edit'])->name('comments.edit')->middleware('owns.comment'); 
+    Route::put('/comments/{comment}',          [CommentController::class, 'update'])->name('comments.update')->middleware('owns.comment'); 
+    Route::delete('/comments/{comment}',       [CommentController::class, 'destroy'])->name('comments.destroy')->middleware('owns.comment'); 
 
     // Favorites / Bookmarks
-    Route::get('/favorites',                       [FavoriteController::class, 'index'])->name('favorites.index');
-    Route::post('/posts/{post}/favorite',          [FavoriteController::class, 'store'])->name('favorites.store');
-    Route::delete('/posts/{post}/favorite',        [FavoriteController::class, 'destroy'])->name('favorites.destroy');
+    Route::get('/favorites',                   [FavoriteController::class, 'index'])->name('favorites.index');
+    Route::post('/posts/{post}/favorite',      [FavoriteController::class, 'store'])->name('favorites.store');
+    Route::delete('/posts/{post}/favorite',    [FavoriteController::class, 'destroy'])->name('favorites.destroy');
 
     // Likes
-    Route::post('/posts/{post}/like',       [LikeController::class, 'store'])->name('likes.store');
-    Route::delete('/posts/{post}/like',     [LikeController::class, 'destroy'])->name('likes.destroy');
+    Route::post('/posts/{post}/like',    [LikeController::class, 'store'])->name('likes.store');
+    Route::delete('/posts/{post}/like',  [LikeController::class, 'destroy'])->name('likes.destroy');
 
 });
