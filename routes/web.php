@@ -38,4 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/posts/{post}/favorite',          [FavoriteController::class, 'store'])->name('favorites.store');
     Route::delete('/posts/{post}/favorite',        [FavoriteController::class, 'destroy'])->name('favorites.destroy');
 
+    // Likes
+    Route::post('/posts/{post}/like',       [LikeController::class, 'store'])->name('likes.store');
+    Route::delete('/posts/{post}/like',     [LikeController::class, 'destroy'])->name('likes.destroy');
+
 });
