@@ -2,7 +2,6 @@
 @section('title', 'View Post')
 
 @section('content')
-    <div class="bg-white text-dark p-4 rounded">
         <h1 class="mb-4">&#64;{{ $post->user->username }} • Post</h1>
         @auth {{-- Ensure user is logged in --}}
             <div class="mb-3">
@@ -85,5 +84,4 @@
             </div>
             <button class="btn btn-primary">Submit Comment</button>
         </form>
-    </div>
 @endsection
