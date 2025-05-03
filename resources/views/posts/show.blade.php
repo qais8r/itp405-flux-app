@@ -16,7 +16,28 @@
                     alt="Post image by {{ $post->user->username }}"
                     style="max-height: 600px; width: 100%; object-fit: cover;">
                 <div class="card-body d-flex flex-column">
-                    <p class="card-text">{{ $post->caption }}</p>
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <p class="card-text mb-0">{{ $post->caption }}</p>
+                        <span class="ms-2 text-muted">
+                            {{ $post->likes()->count() }}
+                            @if ($post->isLikedBy(auth()->user()))
+                                <form action="{{ route('likes.destroy', $post) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger border-0 p-0 ms-1">
+                                        <i class="bi bi-heart-fill"></i>
+                                    </button>
+                                </form>
+                            @else
+                                <form action="{{ route('likes.store', $post) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-outline-danger border-0 p-0 ms-1">
+                                        <i class="bi bi-heart"></i>
+                                    </button>
+                                </form>
+                            @endif
+                        </span>
+                    </div>
                     @auth {{-- Action Buttons --}}
                         <div class="d-flex gap-2 border-top pt-3 mt-auto">
                             @if ($post->isFavoritedBy(auth()->user()))

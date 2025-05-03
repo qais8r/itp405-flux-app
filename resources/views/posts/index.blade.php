@@ -26,7 +26,28 @@
                                 style="aspect-ratio: 1 / 1; object-fit: cover;">
                         </a>
                         <div class="card-body d-flex flex-column">
-                            <p class="card-text mb-2">{{ Str::limit($post->caption, 80) }}</p>
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <p class="card-text mb-0">{{ Str::limit($post->caption, 80) }}</p>
+                                <span class="ms-2 text-muted">
+                                    {{ $post->likes()->count() }}
+                                    @if ($post->isLikedBy(auth()->user()))
+                                        <form action="{{ route('likes.destroy', $post) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger border-0 p-0 ms-1">
+                                                <i class="bi bi-heart-fill"></i>
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('likes.store', $post) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            <button type="submit" class="btn btn-sm btn-outline-danger border-0 p-0 ms-1">
+                                                <i class="bi bi-heart"></i>
+                                            </button>
+                                        </form>
+                                    @endif
+                                </span>
+                            </div>
                             <small class="text-muted mb-3">Posted by &#64;{{ $post->user->username }} •
                                 {{ $post->created_at->diffForHumans() }}</small>
                             <div class="mt-auto d-flex justify-content-between align-items-center">
@@ -80,9 +101,5 @@
                 </div>
             @endforeach
         </div>
-        {{-- Optional: Add pagination links if you implement pagination --}}
-        {{-- <div class="mt-4">
-            {{ $posts->links() }}
-        </div> --}}
     @endif
 @endsection
