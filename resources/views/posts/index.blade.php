@@ -17,18 +17,41 @@
                             <div class="card-body">
                                 <p class="card-text">{{ Str::limit($post->caption, 100) }}</p>
                                 <a href="{{ route('posts.show', $post) }}" class="btn btn-primary">View</a>
-                                @if (auth()->id() === $post->user_id)
-                                    <a href="{{ route('posts.edit', $post) }}"
-                                        class="btn btn-outline-secondary ms-1">Edit</a>
-                                    <form action="{{ route('posts.destroy', $post) }}" method="POST" class="d-inline ms-1"
-                                        onsubmit="return confirm('Are you sure you want to delete this post?');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-outline-danger">
-                                            <i class="bi bi-trash"></i> Delete
-                                        </button>
-                                    </form>
-                                @endif
+                                @auth {{-- Ensure user is logged in --}}
+                                    @if ($post->isFavoritedBy(auth()->user()))
+                                        {{-- Unfavorite Button --}}
+                                        <form action="{{ route('favorites.destroy', $post) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-warning" title="Unfavorite">
+                                                <i class="bi bi-bookmark-fill"></i> Favorited
+                                            </button>
+                                        </form>
+                                    @else
+                                        {{-- Favorite Button --}}
+                                        <form action="{{ route('favorites.store', $post) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            <button type="submit" class="btn btn-outline-warning" title="Favorite">
+                                                <i class="bi bi-bookmark"></i> Favorite
+                                            </button>
+                                        </form>
+                                    @endif
+
+                                    @if (auth()->id() === $post->user_id)
+                                        {{-- Edit Button --}}
+                                        <a href="{{ route('posts.edit', $post) }}"
+                                            class="btn btn-outline-secondary ms-1">Edit</a>
+                                        {{-- Delete Button --}}
+                                        <form action="{{ route('posts.destroy', $post) }}" method="POST" class="d-inline ms-1"
+                                            onsubmit="return confirm('Are you sure you want to delete this post?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-outline-danger">
+                                                <i class="bi bi-trash"></i> Delete
+                                            </button>
+                                        </form>
+                                    @endif
+                                @endauth
                             </div>
                         </div>
                     </div>

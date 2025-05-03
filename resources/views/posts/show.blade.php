@@ -4,19 +4,42 @@
 @section('content')
     <div class="bg-white text-dark p-4 rounded">
         <h1 class="mb-4">&#64;{{ $post->user->username }} • Post</h1>
-        @if (auth()->id() === $post->user_id)
+        @auth {{-- Ensure user is logged in --}}
             <div class="mb-3">
-                <a href="{{ route('posts.edit', $post) }}" class="btn btn-outline-secondary ms-1">Edit</a>
-                <form action="{{ route('posts.destroy', $post) }}" method="POST" class="d-inline"
-                    onsubmit="return confirm('Are you sure you want to delete this post?');">
-                    @csrf
-                    @method('DELETE')
-                    <button class="btn btn-danger">
-                        <i class="bi bi-trash"></i> Delete Post
-                    </button>
-                </form>
+                @if ($post->isFavoritedBy(auth()->user()))
+                    {{-- Unfavorite Button --}}
+                    <form action="{{ route('favorites.destroy', $post) }}" method="POST" class="d-inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-warning" title="Unfavorite">
+                            <i class="bi bi-bookmark-fill"></i> Favorited
+                        </button>
+                    </form>
+                @else
+                    {{-- Favorite Button --}}
+                    <form action="{{ route('favorites.store', $post) }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-warning" title="Favorite">
+                            <i class="bi bi-bookmark"></i> Favorite
+                        </button>
+                    </form>
+                @endif
+
+                @if (auth()->id() === $post->user_id)
+                    {{-- Edit Button --}}
+                    <a href="{{ route('posts.edit', $post) }}" class="btn btn-outline-secondary ms-1">Edit</a>
+                    {{-- Delete Button --}}
+                    <form action="{{ route('posts.destroy', $post) }}" method="POST" class="d-inline ms-1"
+                        onsubmit="return confirm('Are you sure you want to delete this post?');">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger">
+                            <i class="bi bi-trash"></i> Delete Post
+                        </button>
+                    </form>
+                @endif
             </div>
-        @endif
+        @endauth
         <div class="mb-4">
             <img src="{{ asset('storage/' . $post->image_path) }}" class="img-fluid rounded"
                 alt="&#64;{{ $post->user->username }} image">
