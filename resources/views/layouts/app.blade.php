@@ -6,16 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title') • Flux</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #121212;
-            color: #e0e0e0;
-        }
-    </style>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="{{ route('posts.index') }}">Flux</a>
             <div class="collapse navbar-collapse">
@@ -42,7 +36,7 @@
         @endif
         @yield('content')
     </main>
-    <footer class="bg-dark text-center text-muted py-3 mt-auto">
+    <footer class="text-center py-3 mt-auto">
         © {{ date('Y') }} Flux
     </footer>
 </body>
