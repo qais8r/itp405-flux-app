@@ -102,16 +102,17 @@
                                             @if (auth()->id() === $comment->user_id)
                                                 <div class="d-flex gap-1 flex-shrink-0 ms-2">
                                                     <a href="{{ route('comments.edit', $comment) }}"
-                                                        class="btn btn-sm btn-outline-secondary py-0 px-1" title="Edit Comment">
-                                                        <i class="bi bi-pencil"></i>
+                                                        class="btn btn-sm btn-outline-secondary" title="Edit">
+                                                        <i class="bi bi-pencil-fill"></i>
                                                     </a>
                                                     <form action="{{ route('comments.destroy', $comment) }}" method="POST"
-                                                        class="d-inline" onsubmit="return confirm('Delete this comment?');">
+                                                        class="d-inline"
+                                                        onsubmit="return confirm('Are you sure you want to delete this post?');">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-outline-danger py-0 px-1"
-                                                            title="Delete Comment">
-                                                            <i class="bi bi-trash"></i>
+                                                        <button type="submit" class="btn btn-sm btn-outline-danger"
+                                                            title="Delete">
+                                                            <i class="bi bi-trash-fill"></i>
                                                         </button>
                                                     </form>
                                                 </div>
