@@ -47,4 +47,24 @@ class Post extends Model
         // Check if the user's ID exists in the collection of users who favorited this post
         return $this->favoritedBy()->where('user_id', $user->id)->exists();
     }
+
+    /**
+     * Get the likes for the post.
+     */
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    /**
+     * Check if the post is liked by the given user.
+     */
+    public function isLikedBy(?User $user)
+    {
+        if (!$user) {
+            return false;
+        }
+        
+        return $this->likes()->where('user_id', $user->id)->exists();
+    }
 }
