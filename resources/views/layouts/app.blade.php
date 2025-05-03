@@ -48,7 +48,7 @@
         @endif
         @yield('content')
     </main>
-    <footer class="text-center py-3 mt-auto">
+    <footer class="text-center py-3 mt-auto bg-light">
         © {{ date('Y') }} Flux
     </footer>
 </body>
