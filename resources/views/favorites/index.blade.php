@@ -25,8 +25,11 @@
                         </a>
                         <div class="card-body d-flex flex-column">
                             <p class="card-text mb-2">{{ Str::limit($post->caption, 80) }}</p>
-                            <small class="text-muted mb-3">Posted by {{ $post->user->username }}
-                                {{ $post->created_at->diffForHumans() }}</small>
+                            <div class="text-muted small mb-3">
+                                <div><i class="bi bi-person"></i> Posted by {{ $post->user->username }}</div>
+                                <div><i class="bi bi-clock"></i> Posted {{ $post->created_at->diffForHumans() }}</div>
+                                <div><i class="bi bi-bookmark-heart"></i> Favorited {{ $post->pivot->created_at->diffForHumans() }}</div>
+                            </div>
                             <div class="mt-auto d-flex justify-content-between align-items-center">
                                 <a href="{{ route('posts.show', $post) }}" class="btn btn-sm btn-outline-primary">
                                     <i class="bi bi-eye-fill me-1"></i> View
