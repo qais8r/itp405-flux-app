@@ -79,7 +79,7 @@
 <body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top border">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('posts.index') }}">flux</a>
+            <a class="navbar-brand" href="{{ route('posts.index') }}">Flux</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
