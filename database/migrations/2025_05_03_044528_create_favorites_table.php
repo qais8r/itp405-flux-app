@@ -18,7 +18,7 @@ return new class extends Migration
                   ->onDelete('cascade');
             $table->timestamps();
 
-            // prevent a user from favoriting the same post twice
+            // Prevent a user from favoriting the same post twice
             $table->unique(['user_id', 'post_id']);
         });
     }
