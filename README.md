@@ -2,7 +2,7 @@
 
 Flux is a web application developed as my final project for ITP-405. It mimics a simple social media feed where users can register, log in, create posts with images and captions, comment on posts, and favorite posts they like.
 
-This project [fulfills the requirements](https://usc.zoom.us/rec/share/DO2vBrT8wb6p7D8vFYzpspAdh6sWO7rkP1Zgc6wp4ULMV1a6XBbRdHvREF8-L448.wleISwmcrC0z_xst?startTime=1746338632000) for the ITP-405 Final Project.
+This project [fulfills the requirements](https://usc.zoom.us/rec/share/uTwQnPRdOMycRvp2nYwu08Z3a7ztsJeptF7eUET99KI6Fm8SlXZODdapny6hrd_0.n3IJpVDEeWlFYgTt?startTime=1746339856000) for the ITP-405 Final Project.
 
 ## ✨ Features
 
