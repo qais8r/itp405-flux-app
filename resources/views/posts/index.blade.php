@@ -11,7 +11,7 @@
 
     @if ($posts->isEmpty())
         <div class="alert alert-info text-center" role="alert">
-            <h4 class="alert-heading">No posts yet!</h4>
+            <h4 class="alert-heading py-3">No posts yet!</h4>
             <p>Your feed is empty. Why not <a href="{{ route('posts.create') }}" class="alert-link">create your first
                     post</a>?</p>
         </div>
