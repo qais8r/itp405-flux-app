@@ -13,6 +13,7 @@ This project [fulfills the requirements](https://usc.zoom.us/rec/share/uTwQnPRdO
 - **Commenting:** Users can add comments to posts.
 - **Comment Management:** Users can edit and delete their own comments.
 - **Favorites:** Users can mark posts as favorites and view their favorited posts on a separate page.
+- **Likes:** Users can like posts and view the number of likes for each post.
 - **Responsive Design:** Built with Bootstrap for usability across different screen sizes.
 
 ## 🛠️ Technologies Used
@@ -21,17 +22,6 @@ This project [fulfills the requirements](https://usc.zoom.us/rec/share/uTwQnPRdO
 - **Frontend:** Blade Templates, Bootstrap 5
 - **Database:** SQLite
 - **Development Environment:** Laravel Sail (Docker)
-
-## ⚙️ Usage
-
-- Register a new account or log in with existing credentials.
-- Navigate the feed using the "Posts" link.
-- Create a new post using the "Create Post" button.
-- View individual posts by clicking on their image or "View" button.
-- Add comments below posts.
-- Favorite posts using the bookmark icon.
-- View your favorited posts via the "Favorites" link.
-- Edit/Delete your own posts and comments using the respective icons/buttons.
 
 ## 🧑‍💻 Author
 
