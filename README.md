@@ -25,4 +25,4 @@ This project [fulfills the requirements](https://usc.zoom.us/rec/share/uTwQnPRdO
 
 ## 🧑‍💻 Author
 
-**Qaisar** - _ITP-405 Student_
+- **Qaisar** - _ITP-405 Student_
