@@ -9,10 +9,20 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     {{-- Custom CSS for Flash Message --}}
     <style>
+        /* Add padding to prevent content from hiding behind fixed navbar */
+        body {
+            padding-top: 4.5rem;
+        }
+
         /* Define animation for progress bar */
         @keyframes progressBarShrink {
-            from { width: 100%; }
-            to { width: 0%; }
+            from {
+                width: 100%;
+            }
+
+            to {
+                width: 0%;
+            }
         }
 
         /* Style for flash message */
@@ -24,15 +34,16 @@
             z-index: 1050;
             min-width: 300px;
             max-width: 90%;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             background-color: var(--bs-success-bg-subtle);
             color: var(--bs-success-text-emphasis);
             border: 1px solid var(--bs-success-border-subtle);
-            border-radius: var(--bs-alert-border-radius); 
+            border-radius: var(--bs-alert-border-radius);
             opacity: 1;
             transition: opacity 0.5s ease-out;
-            overflow: hidden; 
-            padding-bottom: 20px; /* Add padding for the progress bar */
+            overflow: hidden;
+            padding-bottom: 20px;
+            /* Add padding for the progress bar */
         }
 
         /* Progress bar using ::after pseudo-element */
@@ -41,11 +52,15 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            height: 5px; /* Height of the progress bar */
-            width: 100%; /* Starts full width */
-            background-color: var(--bs-success); /* Darker success color for the bar */
+            height: 5px;
+            /* Height of the progress bar */
+            width: 100%;
+            /* Starts full width */
+            background-color: var(--bs-success);
+            /* Darker success color for the bar */
             /* Apply the animation */
-            animation: progressBarShrink 5s linear forwards; /* 5s duration, linear timing */
+            animation: progressBarShrink 5s linear forwards;
+            /* 5s duration, linear timing */
         }
 
         /* Fade out effect */
@@ -55,16 +70,16 @@
 
         /* Style for close button */
         #flash-message .btn-close {
-             filter: none; 
-             color: var(--bs-success-text-emphasis); 
+            filter: none;
+            color: var(--bs-success-text-emphasis);
         }
     </style>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top border">
         <div class="container">
-            <a class="navbar-brand" href="{{ route('posts.index') }}">Flux App</a>
+            <a class="navbar-brand" href="{{ route('posts.index') }}">flux</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -100,8 +115,8 @@
         @yield('content')
     </main>
 
-    <footer class="text-center py-3 mt-auto bg-light">
-        © {{ date('Y') }} Flux
+    <footer class="text-center py-3 mt-4 bg-light">
+        © {{ date('Y') }} Flux. All rights reserved.
     </footer>
 
     {{-- Flash message --}}
